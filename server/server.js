@@ -47,22 +47,30 @@ app.get('/api/v1/restaurants/:id',async(req,res)=>{
             }
         )    
     } catch (error) {
-        
+        res.status(500)
     }
     
 })
 
 //Create Restaurant POST
-app.post("/api/v1/restaurants", (req, res) => {
-    console.log(req.body);
-    res.status(201).json(
-        {
-            status: 'success',
-            data: {
-                restaurant: "Paradosiako"
+app.post("/api/v1/restaurants", async (req, res) => {
+const {name,location,price_range}=req.body;
+    try {
+        //returning * makes postgres to return when inserting a new row
+        const results = await db.query("insert into restaurants (name, location, price_range) values ($1, $2, $3) returning *",
+        [name,location,price_range])
+        res.status(201).json(
+            {
+                status: 'success',
+                data: {
+                    restaurant: results.rows[0]
+                }
             }
-        }
-    )
+        )    
+    } catch (error) {
+        res.status(500)
+    }
+    
 });
 
 //Update Restaurant PUT
