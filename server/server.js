@@ -14,7 +14,6 @@ app.get('/api/v1/restaurants', async (req,res)=>{
 
     try {
         const results = await db.query('select * from  restaurants')
-        console.log(results.rows)
         res.status(200).json({
             status: "success",
             results: results.rows.length,
@@ -74,25 +73,40 @@ const {name,location,price_range}=req.body;
 });
 
 //Update Restaurant PUT
-app.put('/api/v1/restaurants/:id',(req,res)=>{
-    console.log(req.params.id)
-    console.log(req.body)
-    res.status(200).json(
-        {
-            status: 'success',
-            data: {
-                restaurant: "Paradosiako"
-            }
-        }
-    )
+app.put('/api/v1/restaurants/:id',async(req,res)=>{
+  try {
+      const {name,location,price_range } = req.body
+      const id = req.params.id
+      const results = await db.query("update restaurants set name = $1, location = $2, price_range =$3 where id = $4 returning *",[name,location,price_range,id])
+
+      res.status(200).json(
+          {
+              status: 'success',
+              data: {
+                  restaurant: results.rows
+              }
+          }
+      )  
+  } catch (error) {
+      res.status(501)
+  }
+    
 
 })
 
 //DELETE Restaurant 
-app.delete('/api/v1/restaurants/:id',(req,res)=>{
-    res.status(204).json({
-        status:"success"
-    })
+app.delete('/api/v1/restaurants/:id',async(req,res)=>{
+        try {
+            const id = req.params.id
+            const results = await db.query("delete from restaurants where id = $1",[id])
+
+            res.status(204).json({
+                status:"success"
+            })
+        } catch (error) {
+            res.status(500)
+        }
+    
 })
 
 
