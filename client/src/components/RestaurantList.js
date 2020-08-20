@@ -19,7 +19,7 @@ export default function RestaurantList() {
 						<th scope="row">paradosiako</th>
 						<td>Zografou</td>
 						<td>$$</td>
-						<td><i class="fas fa-star-half-alt"></i></td>
+						<td><i className="fas fa-star-half-alt"></i></td>
 						<td><i className="fas fa-edit"></i></td>
 						<td><i className="far fa-trash-alt"></i></td>
 					</tr>
@@ -27,7 +27,7 @@ export default function RestaurantList() {
 						<th scope="row">Ergotaksio Pizzas</th>
 						<td>Zografou</td>
 						<td>$$</td>
-						<td><i class="fas fa-star-half-alt"></i></td>
+						<td><i className="fas fa-star-half-alt"></i></td>
 						<td><i className="fas fa-edit"></i></td>
 						<td><i className="far fa-trash-alt"></i></td>
 					</tr>	
@@ -35,7 +35,7 @@ export default function RestaurantList() {
 						<th scope="row">Spitiko</th>
 						<td>Zografou</td>
 						<td>$$</td>
-						<td><i class="fas fa-star-half-alt"></i></td>
+						<td><i className="fas fa-star-half-alt"></i></td>
 						<td><i className="fas fa-edit"></i></td>
 						<td><i className="far fa-trash-alt"></i></td>
 					</tr>

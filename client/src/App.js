@@ -5,7 +5,7 @@ import RestaurantDetail from './routes/RestaurantDetail'
 import UpdatePage from './routes/UpdatePage'
 function App() {
   return (
-  	<div class="container">
+  	<div className="container">
 		  <Switch>
 		  	<Route exact path="/">
 		  		<Home />	
@@ -21,7 +21,6 @@ function App() {
 		  
 		  	  </Switch>
 	  </div>
-
 
   )
 }
