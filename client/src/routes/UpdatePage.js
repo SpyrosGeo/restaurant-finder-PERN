@@ -1,6 +1,6 @@
 import React from 'react';
 import EditPage from '../components/EditPage' 
-function UpdatePage({  }) {
+function UpdatePage() {
 	return (
 		<div>
 			<EditPage /> 

@@ -1,5 +1,5 @@
 import React from 'react';
-function RestaurantPage({  }) {
+function RestaurantPage() {
 	return (
 		<div >
 		RestaurantPage
