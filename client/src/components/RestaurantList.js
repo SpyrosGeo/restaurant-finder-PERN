@@ -1,4 +1,4 @@
-import React, { useEffect,useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import GetRestaurants from "../APIS/FetchData";
 import { RestaurantsContext } from "../context/RestaurantsContext";
 
@@ -6,8 +6,8 @@ import { RestaurantsContext } from "../context/RestaurantsContext";
 
 
 export default function RestaurantList(props) {
-  const{restaurants,setRestaurants}=useContext(RestaurantsContext)  
-  
+  const { restaurants, setRestaurants } = useContext(RestaurantsContext)
+
   useEffect(() => {
     const fetchServerData = async () => {
       try {
@@ -33,7 +33,21 @@ export default function RestaurantList(props) {
             <th scope="col">Delete</th>
           </tr>
         </thead>
-        <tbody>
+        {restaurants.map(restaurant => (
+          <tr key={restaurant.id}>
+            <td>{restaurant.name}</td>
+            <td>{restaurant.location}</td>
+            <td>{"$".repeat(restaurant.price_range)}</td>
+            <td><i className="fas fa-star-half-alt"></i></td>
+            <td>
+              <i style={{color:"lightblue"}} className="fas fa-edit"></i>
+            </td>
+            <td>
+              <i style={{color:"red"}} className="far fa-trash-alt"></i>
+            </td>
+          </tr>
+        ))}
+        {/* <tbody>
           <tr>
             <th scope="row">paradosiako</th>
             <td>Zografou</td>
@@ -76,7 +90,7 @@ export default function RestaurantList(props) {
               <i className="far fa-trash-alt"></i>
             </td>
           </tr>
-        </tbody>
+        </tbody> */}
       </table>
     </div>
   );
