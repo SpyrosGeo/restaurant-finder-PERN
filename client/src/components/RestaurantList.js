@@ -20,6 +20,18 @@ export default function RestaurantList(props) {
     fetchServerData();
   }, [setRestaurants]);
 
+
+  const handleDelete = async (id) => {
+    try {
+       await GetRestaurants.delete(`/${id}`)
+      setRestaurants(restaurants.filter(restaurant => {
+        return restaurant.id !== id
+      }))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <div>
       <table className="table table-dark">
@@ -34,20 +46,20 @@ export default function RestaurantList(props) {
           </tr>
         </thead>
         <tbody>
-        {restaurants.map(restaurant => (
-          <tr key={restaurant.id}>
-            <td>{restaurant.name}</td>
-            <td>{restaurant.location}</td>
-            <td>{"$".repeat(restaurant.price_range)}</td>
-            <td><i className="fas fa-star-half-alt"></i></td>
-            <td>
-              <i style={{color:"lightblue"}} className="fas fa-edit"></i>
-            </td>
-            <td>
-              <i style={{color:"red"}} className="far fa-trash-alt"></i>
-            </td>
-          </tr>
-        ))}
+          {restaurants.map(restaurant => (
+            <tr key={restaurant.id}>
+              <td>{restaurant.name}</td>
+              <td>{restaurant.location}</td>
+              <td>{"$".repeat(restaurant.price_range)}</td>
+              <td><i className="fas fa-star-half-alt"></i></td>
+              <td>
+                <i onClick={() => handleDelete(restaurant.id)} style={{ color: "lightblue" }} className="fas fa-edit"></i>
+              </td>
+              <td>
+                <i onClick={() => handleDelete(restaurant.id)} style={{ color: "red" }} className="far fa-trash-alt"></i>
+              </td>
+            </tr>
+          ))}
         </tbody>
         {/* <tbody>
           <tr>
