@@ -33,6 +33,7 @@ export default function RestaurantList(props) {
             <th scope="col">Delete</th>
           </tr>
         </thead>
+        <tbody>
         {restaurants.map(restaurant => (
           <tr key={restaurant.id}>
             <td>{restaurant.name}</td>
@@ -47,6 +48,7 @@ export default function RestaurantList(props) {
             </td>
           </tr>
         ))}
+        </tbody>
         {/* <tbody>
           <tr>
             <th scope="row">paradosiako</th>
