@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import FetchData from "../APIS/FetchData";
+import { RestaurantsContext } from "../context/RestaurantsContext";
+
+
+
 function AddRestaurant() {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [priceRange, setPriceRange] = useState("Price Range");
-
+  const {addRestaurants} = useContext(RestaurantsContext)
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -13,7 +17,8 @@ function AddRestaurant() {
         location,
         price_range: priceRange,
       });
-      console.log(res);
+
+      addRestaurants(res.data.data.restaurant)
     } catch (err) {
       console.log(err);
     }
