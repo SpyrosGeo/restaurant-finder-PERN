@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { RestaurantsContext } from '../context/RestaurantsContext'
 import FetchData from '../APIS/FetchData'
 
 export default function UpdateRestaurant() {
     const { id } = useParams()
+    let history = useHistory()
     const [name, setName] = useState("")
     const [location, setLocation] = useState("")
     const [priceRange, setPriceRange] = useState("")
@@ -29,8 +30,8 @@ export default function UpdateRestaurant() {
             location,
             price_range:priceRange
         })
-        console.log(updatedRestaurant)
-        }
+        history.push('/')
+    }
 
 
     return (
