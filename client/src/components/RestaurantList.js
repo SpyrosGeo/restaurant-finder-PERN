@@ -1,12 +1,14 @@
 import React, { useEffect, useContext } from "react";
 import GetRestaurants from "../APIS/FetchData";
 import { RestaurantsContext } from "../context/RestaurantsContext";
+import {useHistory} from 'react-router-dom'
 
 
 
 
 export default function RestaurantList(props) {
   const { restaurants, setRestaurants } = useContext(RestaurantsContext)
+  let history = useHistory()
 
   useEffect(() => {
     const fetchServerData = async () => {
@@ -31,6 +33,9 @@ export default function RestaurantList(props) {
       console.log(err)
     }
   }
+  const handleUpdate = async(id) =>{
+      history.push(`/restaurants/${id}/update`)
+  }
 
   return (
     <div>
@@ -53,7 +58,7 @@ export default function RestaurantList(props) {
               <td>{"$".repeat(restaurant.price_range)}</td>
               <td><i className="fas fa-star-half-alt"></i></td>
               <td>
-                <i onClick={() => handleDelete(restaurant.id)} style={{ color: "lightblue" }} className="fas fa-edit"></i>
+                <i onClick={()=> handleUpdate(restaurant.id)} style={{ color: "lightblue" }} className="fas fa-edit"></i>
               </td>
               <td>
                 <i onClick={() => handleDelete(restaurant.id)} style={{ color: "red" }} className="far fa-trash-alt"></i>
