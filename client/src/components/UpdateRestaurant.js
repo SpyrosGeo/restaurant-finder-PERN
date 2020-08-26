@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
-import { RestaurantsContext } from '../context/RestaurantsContext'
+// import { RestaurantsContext } from '../context/RestaurantsContext'
 import FetchData from '../APIS/FetchData'
 
 export default function UpdateRestaurant() {
@@ -25,7 +25,7 @@ export default function UpdateRestaurant() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const updatedRestaurant = await FetchData.put(`/${id}`,{
+         await FetchData.put(`/${id}`,{
             name,
             location,
             price_range:priceRange

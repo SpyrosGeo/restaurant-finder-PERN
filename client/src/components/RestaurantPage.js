@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { RestaurantsContext } from '../context/RestaurantsContext';
 import FetchData from '../APIS/FetchData';
 import StarRating from './StarRating';
+import Reviews from './Reviews';
+import AddReview from './AddReview';
 function RestaurantPage() {
 	const { id } = useParams()
 	const { selectedRestaurant, setSelectedRestaurant } = useContext(RestaurantsContext)
@@ -14,8 +16,8 @@ function RestaurantPage() {
 
 			try {
 				const res = await FetchData.get(`/${id}`)
-				setSelectedRestaurant(res.data.data.restaurant)
-				// console.log(res.data.data.restaurant)
+				setSelectedRestaurant(res.data.data)
+				// console.log(res)
 				
 
 			} catch (error) {
@@ -25,10 +27,20 @@ function RestaurantPage() {
 		}
 		fetchRestaurant()
 	}, [id,setSelectedRestaurant])
+
+	console.log(selectedRestaurant)
 	return (
-		<div >
-			
-			<h1>{selectedRestaurant && <StarRating rating={1.1}/>}</h1>
+		<div>
+			{selectedRestaurant && (
+
+				<>
+				<h1 className="text-center display-1">{selectedRestaurant.restaurant[0].name}</h1>
+				<div className="mt-3">
+					<Reviews reviews={selectedRestaurant.reviews} />
+				</div>
+					<AddReview/>
+				</>
+			)}
 		</div>
 	);
 }

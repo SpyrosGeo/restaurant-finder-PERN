@@ -21,4 +21,4 @@ CREATE TABLE reviews
     rating INT check(rating >=1 and rating <=5)
 );
 
-insert into reviews (restaurant_id, name, review, rating) values (4, 'koulis', 'exw polla epixeirimata gia to poso kako einai apla den ta thumamai', 1);
+insert into reviews (restaurant_id, name, review, rating) values (4, 'koulis', 'test1', 1);
