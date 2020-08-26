@@ -104,6 +104,27 @@ app.delete("/api/v1/restaurants/:id", async (req, res) => {
   }
 });
 
+
+//add review route
+
+app.post("/api/v1/restaurants/:id/addReview", async(req,res)=>{
+  const {id} = req.params
+  const {name,review,rating } =req.body
+  try {
+     const newReview = await db.query("insert into reviews (restaurant_id, name, review, rating) values ($1, $2, $3, $4) returning *",[id, name, review, rating])
+      res.status(201).json({
+        status:'success',
+        data:{
+          review:newReview.rows[0]
+        }
+      })
+    } catch (error) {
+    console.log(error)
+  }
+})
+
+
+
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });
