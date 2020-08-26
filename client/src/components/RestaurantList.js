@@ -23,7 +23,8 @@ export default function RestaurantList(props) {
   }, [setRestaurants]);
 
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (e,id) => {
+    e.stopPropagation()
     try {
        await GetRestaurants.delete(`/${id}`)
       setRestaurants(restaurants.filter(restaurant => {
@@ -33,9 +34,16 @@ export default function RestaurantList(props) {
       console.log(err)
     }
   }
-  const handleUpdate = async(id) =>{
+  const handleUpdate = async(e,id) =>{
+      e.stopPropagation()
       history.push(`/restaurants/${id}/update`)
   }
+
+
+  const handleRestaurantSelect = async(id)=>{
+    history.push(`/restaurants/${id}`)
+  }
+
 
   return (
     <div>
@@ -52,16 +60,16 @@ export default function RestaurantList(props) {
         </thead>
         <tbody>
           {restaurants.map(restaurant => (
-            <tr key={restaurant.id}>
+            <tr onClick={()=>handleRestaurantSelect(restaurant.id)} key={restaurant.id}>
               <td>{restaurant.name}</td>
               <td>{restaurant.location}</td>
               <td>{"$".repeat(restaurant.price_range)}</td>
               <td><i className="fas fa-star-half-alt"></i></td>
               <td>
-                <i onClick={()=> handleUpdate(restaurant.id)} style={{ color: "lightblue" }} className="fas fa-edit"></i>
+                <i onClick={(e)=> handleUpdate(e,restaurant.id)} style={{ color: "lightblue" }} className="fas fa-edit"></i>
               </td>
               <td>
-                <i onClick={() => handleDelete(restaurant.id)} style={{ color: "red" }} className="far fa-trash-alt"></i>
+                <i onClick={(e) => handleDelete(e,restaurant.id)} style={{ color: "red" }} className="far fa-trash-alt"></i>
               </td>
             </tr>
           ))}
