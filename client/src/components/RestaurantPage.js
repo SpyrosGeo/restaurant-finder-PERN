@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { RestaurantsContext } from '../context/RestaurantsContext';
 import FetchData from '../APIS/FetchData';
-import StarRating from './StarRating';
 import Reviews from './Reviews';
 import AddReview from './AddReview';
 function RestaurantPage() {
@@ -28,7 +27,6 @@ function RestaurantPage() {
 		fetchRestaurant()
 	}, [id,setSelectedRestaurant])
 
-	console.log(selectedRestaurant)
 	return (
 		<div>
 			{selectedRestaurant && (

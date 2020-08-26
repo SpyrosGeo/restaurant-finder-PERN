@@ -1,13 +1,38 @@
 import React, { useState } from 'react'
+import FetchData from '../APIS/FetchData'
+import { useParams, useHistory, useLocation } from 'react-router'
 
 export default function AddReview() {
+   const {id} = useParams()
+   const history = useHistory()
+   const location = useLocation()
     const [name, setName] = useState("")
     const [reviewText, setReviewText] = useState("")
     const [rating, setRating] = useState("Rating")
 
+
+
+
+    const handleSubmitReview = async(e) =>{
+        e.preventDefault()
+        try {
+            await FetchData.post(`/${id}/addReview`, {
+                name,
+                review: reviewText,
+                rating
+            })
+            //trigger a quick refresh to get the newly added review
+            history.push("/")
+            history.push(location.pathname)
+        } catch (error) {
+            console.log(error)
+        }
+            
+    } 
+
     return (
         <div className="mb-2">
-            <form >
+            <form onSubmit={handleSubmitReview} >
                 <div className="form-row">
                     <div className="form-group col-8">
                         <label htmlFor="name">Name</label>
